@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitt's Law Accessibility Examples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f4e3;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .form-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #442f10;
+            margin-bottom: 30px;
+            grid-column: 1 / -1;
+        }
+
+        h2 {
+            color: #442f10;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .bad-form h2 {
+            color: #9f126c;
+        }
+
+        .good-form h2 {
+            color: #29583f;
+        }
+
+        /* BAD FORM - Violates Fitt's Law */
+        .bad-form label {
+            display: block;
+            font-size: 9px;
+            margin-bottom: 2px;
+            color: #442f10;
+        }
+
+        .bad-form input[type="text"],
+        .bad-form textarea {
+            width: 120px;
+            height: 16px;
+            padding: 2px 4px;
+            font-size: 8px;
+            border: 1px solid #9f126c;
+            border-radius: 2px;
+            margin-bottom: 8px;
+        }
+
+        .bad-form textarea {
+            height: 30px;
+            resize: none;
+        }
+
+        .bad-form .checkbox-group {
+            margin: 8px 0;
+        }
+
+        .bad-form .checkbox-item {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 8px;
+        }
+
+        .bad-form input[type="checkbox"] {
+            width: 8px;
+            height: 8px;
+            margin-right: 3px;
+            cursor: pointer;
+        }
+
+        .bad-form button {
+            padding: 3px 8px;
+            font-size: 8px;
+            background-color: #9f126c;
+            color: white;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        /* GOOD FORM - Follows Fitt's Law */
+        .good-form label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #442f10;
+            font-weight: 500;
+        }
+
+        .good-form input[type="text"],
+        .good-form textarea {
+            width: 100%;
+            padding: 16px;
+            font-size: 16px;
+            border: 2px solid #29583f;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .good-form input[type="text"]:focus,
+        .good-form textarea:focus {
+            outline: none;
+            border-color: #1d448c;
+            box-shadow: 0 0 0 3px rgba(29, 68, 140, 0.1);
+        }
+
+        .good-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .good-form .checkbox-group {
+            margin: 20px 0;
+        }
+
+        .good-form .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            margin-bottom: 12px;
+            background-color: #d5ede2;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .good-form .checkbox-item:hover {
+            background-color: #c2cef2;
+        }
+
+        .good-form input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .good-form .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        .good-form button {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #29583f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .good-form button:hover {
+            background-color: #1d448c;
+        }
+
+        .good-form button:active {
+            transform: scale(0.98);
+        }
+
+        .description {
+            grid-column: 1 / -1;
+            background: #c2cef2;
+            padding: 20px;
+            border-radius: 8px;
+            color: #442f10;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fitt's Law: Accessibility Comparison</h1>
+        
+        <div class="description">
+            <strong>Fitt's Law:</strong> The time to acquire a target is a function of the distance to and size of the target. Try using both forms below - notice how much harder the left form is to complete accurately!
+        </div>
+
+        <!-- BAD FORM -->
+        <div class="form-section bad-form">
+            <h2>❌ Poor Design (Violates Fitt's Law)</h2>
+            <form>
+                <label for="bad-fname">First Name</label>
+                <input type="text" id="bad-fname" name="fname">
+
+                <label for="bad-lname">Last Name</label>
+                <input type="text" id="bad-lname" name="lname">
+
+                <label for="bad-address">Address</label>
+                <textarea id="bad-address" name="address"></textarea>
+
+                <label>What issues do you care about?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bad-env" name="issues" value="environment">
+                        <label for="bad-env">Environment</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bad-health" name="issues" value="healthcare">
+                        <label for="bad-health">Healthcare</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bad-edu" name="issues" value="education">
+                        <label for="bad-edu">Education</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bad-econ" name="issues" value="economy">
+                        <label for="bad-econ">Economy</label>
+                    </div>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- GOOD FORM -->
+        <div class="form-section good-form">
+            <h2>✓ Good Design (Follows Fitt's Law)</h2>
+            <form>
+                <label for="good-fname">First Name</label>
+                <input type="text" id="good-fname" name="fname">
+
+                <label for="good-lname">Last Name</label>
+                <input type="text" id="good-lname" name="lname">
+
+                <label for="good-address">Address</label>
+                <textarea id="good-address" name="address"></textarea>
+
+                <label>What issues do you care about?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="good-env" name="issues" value="environment">
+                        <label for="good-env">Environment</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="good-health" name="issues" value="healthcare">
+                        <label for="good-health">Healthcare</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="good-edu" name="issues" value="education">
+                        <label for="good-edu">Education</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="good-econ" name="issues" value="economy">
+                        <label for="good-econ">Economy</label>
+                    </div>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
