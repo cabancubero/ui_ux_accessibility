@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jakob's Law: Campaign Management Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f4e3;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #442f10;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            background: #c2cef2;
+            padding: 20px;
+            border-radius: 8px;
+            color: #442f10;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .example {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .example-header {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .example h2 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .bad-example .example-header {
+            background-color: #9f126c;
+            color: white;
+        }
+
+        .good-example .example-header {
+            background-color: #29583f;
+            color: white;
+        }
+
+        /* BAD EXAMPLE - Absurd, Unconventional */
+        .bad-example .content {
+            padding: 0;
+            background: linear-gradient(45deg, #f2c53d, #f28d35, #9f126c);
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bad-example .spinning-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background-color: #7f64a9;
+            border-radius: 50%;
+            animation: spin 3s linear infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .bad-example .floating-menu {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .bad-example .menu-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 10px;
+            text-align: center;
+            padding: 5px;
+            color: #442f10;
+            font-weight: bold;
+            border: 3px solid #1d448c;
+        }
+
+        .bad-example .menu-circle:hover {
+            transform: scale(1.2) rotate(15deg);
+            background-color: #d5ede2;
+        }
+
+        .bad-example .diagonal-title {
+            position: absolute;
+            top: 150px;
+            left: -50px;
+            transform: rotate(-45deg);
+            background-color: rgba(29, 68, 140, 0.8);
+            color: white;
+            padding: 20px 150px;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .bad-example .vertical-text {
+            position: absolute;
+            right: 10px;
+            top: 120px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 14px;
+            color: white;
+            background-color: rgba(68, 47, 16, 0.7);
+            padding: 15px 5px;
+        }
+
+        .bad-example .bounce-button {
+            position: absolute;
+            top: 350px;
+            left: 100px;
+            background-color: #f28d35;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            animation: bounce 2s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(360deg); }
+        }
+
+        .bad-example .zigzag-nav {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .bad-example .zigzag-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 15px;
+            border-radius: 20px 5px 20px 5px;
+            cursor: pointer;
+            font-size: 12px;
+            color: #442f10;
+            font-weight: bold;
+            transform-origin: left;
+            transition: all 0.3s;
+        }
+
+        .bad-example .zigzag-item:nth-child(even) {
+            margin-left: 40px;
+            border-radius: 5px 20px 5px 20px;
+        }
+
+        .bad-example .zigzag-item:hover {
+            transform: scale(1.1) rotate(-5deg);
+            background-color: #d5ede2;
+        }
+
+        .bad-example .search-box {
+            position: absolute;
+            bottom: 150px;
+            right: 30px;
+            transform: rotate(15deg);
+        }
+
+        .bad-example .search-box input {
+            border: 3px solid #7f64a9;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 14px;
+            width: 200px;
+        }
+
+        /* GOOD EXAMPLE - Conventional, Follows Jakob's Law */
+        .good-example .content {
+            padding: 0;
+        }
+
+        .good-example .nav-bar {
+            background-color: #29583f;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .good-example .logo {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .good-example .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .good-example .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .good-example .nav-links a:hover {
+            color: #f2c53d;
+        }
+
+        .good-example .hero {
+            background: linear-gradient(135deg, #1d448c 0%, #29583f 100%);
+            padding: 60px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .good-example .hero h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .good-example .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .good-example .cta-button {
+            background-color: #f28d35;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .good-example .cta-button:hover {
+            background-color: #f2c53d;
+        }
+
+        .good-example .features {
+            padding: 50px 30px;
+            background-color: #f8f4e3;
+        }
+
+        .good-example .features h2 {
+            text-align: center;
+            color: #442f10;
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+
+        .good-example .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .good-example .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .good-example .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .good-example .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #d5ede2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .good-example .feature-card h3 {
+            color: #29583f;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .good-example .feature-card p {
+            color: #442f10;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .good-example .footer {
+            background-color: #442f10;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1024px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .bad-example .diagonal-title {
+                font-size: 20px;
+                padding: 15px 100px;
+            }
+            
+            .good-example .hero h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jakob's Law: Campaign Management Tool</h1>
+        
+        <div class="description">
+            <strong>Jakob's Law:</strong> Users spend most of their time on other sites and expect your site to work like those they already know. Compare the chaotic, unconventional design (left) with the familiar, conventional design (right).
+        </div>
+
+        <div class="comparison">
+            <!-- BAD EXAMPLE - Absurd Design -->
+            <div class="example bad-example">
+                <div class="example-header">
+                    <h2>❌ Breaking All Conventions</h2>
+                    <p style="font-size: 14px; margin-top: 5px;">Good luck finding anything!</p>
+                </div>
+                <div class="content">
+                    <div class="spinning-logo">🎪</div>
+                    
+                    <div class="diagonal-title">
+                        CampaignBuilder Pro
+                    </div>
+                    
+                    <div class="vertical-text">
+                        Scroll sideways maybe? Who knows! Click things! Have fun!
+                    </div>
+                    
+                    <div class="zigzag-nav">
+                        <div class="zigzag-item">Lists</div>
+                        <div class="zigzag-item">Volunteers</div>
+                        <div class="zigzag-item">Canvas</div>
+                        <div class="zigzag-item">Phone</div>
+                        <div class="zigzag-item">Events</div>
+                    </div>
+                    
+                    <button class="bounce-button">Get Started???</button>
+                    
+                    <div class="search-box">
+                        <input type="text" placeholder="Search (tilted!)">
+                    </div>
+                    
+                    <div class="floating-menu">
+                        <div class="menu-circle">📋<br>Build Lists</div>
+                        <div class="menu-circle">👥<br>Manage Volunteers</div>
+                        <div class="menu-circle">🚪<br>Schedule Canvassing</div>
+                        <div class="menu-circle">📞<br>Phone Banks</div>
+                        <div class="menu-circle">🎉<br>Events</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GOOD EXAMPLE - Conventional Design -->
+            <div class="example good-example">
+                <div class="example-header">
+                    <h2>✓ Following Conventions</h2>
+                    <p style="font-size: 14px; margin-top: 5px;">Familiar and intuitive</p>
+                </div>
+                <div class="content">
+                    <!-- Navigation Bar -->
+                    <div class="nav-bar">
+                        <div class="logo">CampaignBuilder Pro</div>
+                        <nav class="nav-links">
+                            <a href="#features">Features</a>
+                            <a href="#pricing">Pricing</a>
+                            <a href="#about">About</a>
+                            <a href="#contact">Contact</a>
+                        </nav>
+                    </div>
+                    
+                    <!-- Hero Section -->
+                    <div class="hero">
+                        <h1>Organize Your Campaign</h1>
+                        <p>Everything you need to manage supporters, volunteers, and events in one place</p>
+                        <button class="cta-button">Get Started Free</button>
+                    </div>
+                    
+                    <!-- Features Section -->
+                    <div class="features">
+                        <h2>Powerful Tools for Your Campaign</h2>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">📋</div>
+                                <h3>Build Supporter Lists</h3>
+                                <p>Create and segment supporter lists with custom fields and smart filters</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">👥</div>
+                                <h3>Manage Volunteers</h3>
+                                <p>Track volunteer hours, skills, and availability in one centralized system</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">🚪</div>
+                                <h3>Schedule Canvassing</h3>
+                                <p>Plan door-knocking routes and assign territories to your field team</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">📞</div>
+                                <h3>Phone Bank Shifts</h3>
+                                <p>Coordinate calling campaigns with integrated dialer and call scripts</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">🎉</div>
+                                <h3>Manage Events</h3>
+                                <p>Create events, send invitations, and track RSVPs effortlessly</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">📊</div>
+                                <h3>Analytics Dashboard</h3>
+                                <p>Monitor campaign performance with real-time insights and reports</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Footer -->
+                    <div class="footer">
+                        <p>© 2025 CampaignBuilder Pro. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
