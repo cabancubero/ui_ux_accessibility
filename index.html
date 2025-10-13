@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX Accessibility Examples</title>
+    <style>
+        /* Accessibility-focused design following Hick's, Jakob's, and Fitts's Laws */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8f4e3; /* Ivory background */
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #442f10; /* Brown text for strong contrast */
+        }
+
+        .container {
+            max-width: 1400px; /* Allow more width on larger screens */
+            margin: 0 auto;
+        }
+
+        /* Jakob's Law: Familiar header pattern */
+        h1 {
+            color: #442f10; /* Brown for high contrast on ivory */
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        /* Simple, clear introduction */
+        .intro {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border: 2px solid #29583f; /* Green border for definition */
+            box-shadow: 0 2px 8px rgba(68, 47, 16, 0.1);
+        }
+
+        .intro h2 {
+            color: #29583f; /* Green heading */
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .intro p {
+            color: #442f10; /* Brown text */
+            line-height: 1.7;
+            font-size: 1.1em;
+        }
+
+        /* Responsive flexbox layout */
+        .examples-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        /* Jakob's Law: Card pattern is familiar to users */
+        .example-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #d5ede2; /* Light green border */
+            transition: border-color 0.3s, box-shadow 0.3s;
+            flex: 1 1 calc(50% - 24px); /* 2 columns on larger screens */
+            min-width: 280px; /* Minimum card width - accessible for small phones */
+            max-width: 500px; /* Maximum card width for readability */
+        }
+
+        /* Subtle hover effect */
+        .example-card:hover {
+            border-color: #29583f;
+            box-shadow: 0 4px 12px rgba(41, 88, 63, 0.15);
+        }
+
+        .example-header {
+            background-color: #d5ede2; /* Light green background */
+            padding: 20px 25px;
+            border-bottom: 2px solid #29583f;
+        }
+
+        .example-header h3 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            color: #442f10; /* Brown heading */
+            font-weight: 600;
+        }
+
+        .example-header p {
+            color: #442f10;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .example-body {
+            padding: 20px 25px;
+            background: white;
+        }
+
+        /* Hick's Law: Reduced to single prominent action */
+        .example-buttons {
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+        }
+
+        /* Fitts's Law: Large, easy-to-click buttons with good spacing */
+        .btn {
+            width: 100%;
+            padding: 16px 24px; /* Larger touch targets */
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.25s ease;
+            display: block;
+        }
+
+        /* Primary action: View Demo (most important) */
+        .btn-primary {
+            background-color: #29583f; /* Green */
+            color: white;
+            border-color: #29583f;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #1d448c; /* Blue on hover */
+            border-color: #1d448c;
+            box-shadow: 0 0 0 3px rgba(29, 68, 140, 0.2);
+            outline: none;
+        }
+
+        /* Secondary action: Try in Playground */
+        .btn-secondary {
+            background-color: white;
+            color: #29583f;
+            border-color: #29583f;
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            background-color: #d5ede2; /* Light green on hover */
+            box-shadow: 0 0 0 3px rgba(41, 88, 63, 0.15);
+            outline: none;
+        }
+
+        /* Tertiary action: View Source */
+        .btn-tertiary {
+            background-color: #c2cef2; /* Periwinkle */
+            color: #442f10;
+            border-color: #7f64a9; /* Purple */
+        }
+
+        .btn-tertiary:hover,
+        .btn-tertiary:focus {
+            background-color: #7f64a9; /* Purple on hover */
+            color: white;
+            border-color: #7f64a9;
+            box-shadow: 0 0 0 3px rgba(127, 100, 169, 0.2);
+            outline: none;
+        }
+
+        /* Focus visible for keyboard navigation */
+        .btn:focus-visible {
+            outline: 3px solid #f28d35; /* Orange outline */
+            outline-offset: 2px;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(68, 47, 16, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid #29583f;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: #29583f;
+            color: white;
+            padding: 20px 25px;
+            border-radius: 9px 9px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.3em;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: #9f126c;
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s;
+        }
+
+        .modal-close:hover {
+            background: #7f64a9;
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 25px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .code-display {
+            background: #f8f4e3;
+            border: 2px solid #d5ede2;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        .code-display pre {
+            margin: 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #442f10;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .copy-button {
+            background: #1d448c;
+            color: white;
+            border: 2px solid #1d448c;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            width: 100%;
+        }
+
+        .copy-button:hover {
+            background: #29583f;
+            border-color: #29583f;
+        }
+
+        .copy-button.copied {
+            background: #29583f;
+            border-color: #29583f;
+        }
+
+        /* Large desktop: 2 columns */
+        @media (min-width: 1200px) {
+            .examples-grid {
+                gap: 30px;
+            }
+
+            .example-card {
+                flex: 1 1 calc(50% - 30px);
+            }
+        }
+
+        /* Tablet: 2 columns with smaller gap */
+        @media (min-width: 769px) and (max-width: 1199px) {
+            .examples-grid {
+                gap: 20px;
+            }
+
+            .example-card {
+                flex: 1 1 calc(50% - 20px);
+            }
+        }
+
+        /* Mobile: Single column stack */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .intro {
+                padding: 20px;
+            }
+
+            .examples-grid {
+                gap: 20px;
+            }
+
+            .example-card {
+                flex: 1 1 100%; /* Full width on mobile */
+                max-width: none;
+            }
+
+            .btn {
+                padding: 14px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>UI/UX & Accessibility Examples</h1>
+
+        <div class="intro">
+            <h2>Learn by Comparison</h2>
+            <p>
+                Explore side-by-side comparisons of good and bad UI/UX design practices.
+                Each example demonstrates important principles of user experience and accessibility.
+                View the demos directly, or jump into the interactive playground to experiment with the code yourself!
+            </p>
+        </div>
+
+        <div class="examples-grid">
+            <div class="example-card">
+                <div class="example-header">
+                    <h3>Color Contrast</h3>
+                    <p>WCAG compliant color contrast ensures text is readable for all users, including those with visual impairments.</p>
+                </div>
+                <div class="example-body">
+                    <div class="example-buttons">
+                        <a href="contrast_comparison.html" class="btn btn-primary">View Demo</a>
+                        <a href="playground.html?example=contrast_comparison" class="btn btn-secondary">Try in Playground</a>
+                        <button class="btn btn-tertiary" onclick="showSource('contrast_comparison', 'Color Contrast')">View Source</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <h3>Hick's Law</h3>
+                    <p>The time it takes to make a decision increases with the number of choices. Simplify to improve UX.</p>
+                </div>
+                <div class="example-body">
+                    <div class="example-buttons">
+                        <a href="hicks_law_comparison.html" class="btn btn-primary">View Demo</a>
+                        <a href="playground.html?example=hicks_law_comparison" class="btn btn-secondary">Try in Playground</a>
+                        <button class="btn btn-tertiary" onclick="showSource('hicks_law_comparison', 'Hick\'s Law')">View Source</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <h3>Jakob's Law</h3>
+                    <p>Users prefer your site to work the same way as other sites they already know.</p>
+                </div>
+                <div class="example-body">
+                    <div class="example-buttons">
+                        <a href="jakobs_law_comparison.html" class="btn btn-primary">View Demo</a>
+                        <a href="playground.html?example=jakobs_law_comparison" class="btn btn-secondary">Try in Playground</a>
+                        <button class="btn btn-tertiary" onclick="showSource('jakobs_law_comparison', 'Jakob\'s Law')">View Source</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <h3>Fitts's Law</h3>
+                    <p>The time to acquire a target is a function of distance and size. Make interactive elements appropriately sized.</p>
+                </div>
+                <div class="example-body">
+                    <div class="example-buttons">
+                        <a href="fitts_law_comparison.html" class="btn btn-primary">View Demo</a>
+                        <a href="playground.html?example=fitts_law_comparison" class="btn btn-secondary">Try in Playground</a>
+                        <button class="btn btn-tertiary" onclick="showSource('fitts_law_comparison', 'Fitts\'s Law')">View Source</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <h3>Alt Text</h3>
+                    <p>Proper alternative text makes images accessible to screen reader users and improves SEO.</p>
+                </div>
+                <div class="example-body">
+                    <div class="example-buttons">
+                        <a href="alt_text_examples.html" class="btn btn-primary">View Demo</a>
+                        <a href="playground.html?example=alt_text_examples" class="btn btn-secondary">Try in Playground</a>
+                        <button class="btn btn-tertiary" onclick="showSource('alt_text_examples', 'Alt Text')">View Source</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <h3>User Controls</h3>
+                    <p>Give users control over auto-playing content, animations, and time-sensitive interactions.</p>
+                </div>
+                <div class="example-body">
+                    <div class="example-buttons">
+                        <a href="user_controls_comparison.html" class="btn btn-primary">View Demo</a>
+                        <a href="playground.html?example=user_controls_comparison" class="btn btn-secondary">Try in Playground</a>
+                        <button class="btn btn-tertiary" onclick="showSource('user_controls_comparison', 'User Controls')">View Source</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-header">
+                    <h3>Lazy Loading</h3>
+                    <p>Improve performance and user experience with progressive content loading strategies.</p>
+                </div>
+                <div class="example-body">
+                    <div class="example-buttons">
+                        <a href="lazy_load_example.html" class="btn btn-primary">View Demo</a>
+                        <a href="playground.html?example=lazy_load_example" class="btn btn-secondary">Try in Playground</a>
+                        <button class="btn btn-tertiary" onclick="showSource('lazy_load_example', 'Lazy Loading')">View Source</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Source Code Modal -->
+    <div id="sourceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Source Code</h2>
+                <button class="modal-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <button class="copy-button" onclick="copySource()">Copy to Clipboard</button>
+                <div class="code-display">
+                    <pre id="sourceCode"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSource = '';
+
+        async function showSource(filename, title) {
+            try {
+                const response = await fetch(`${filename}.html`);
+                const source = await response.text();
+                currentSource = source;
+
+                document.getElementById('modalTitle').textContent = `${title} - Source Code`;
+                document.getElementById('sourceCode').textContent = source;
+                document.getElementById('sourceModal').classList.add('active');
+
+                // Prevent body scroll when modal is open
+                document.body.style.overflow = 'hidden';
+            } catch (error) {
+                alert('Error loading source code. Please try again.');
+                console.error('Error:', error);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('sourceModal').classList.remove('active');
+            document.body.style.overflow = '';
+
+            // Reset copy button
+            const copyBtn = document.querySelector('.copy-button');
+            copyBtn.textContent = 'Copy to Clipboard';
+            copyBtn.classList.remove('copied');
+        }
+
+        async function copySource() {
+            try {
+                await navigator.clipboard.writeText(currentSource);
+                const copyBtn = document.querySelector('.copy-button');
+                copyBtn.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+
+                setTimeout(() => {
+                    copyBtn.textContent = 'Copy to Clipboard';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            } catch (error) {
+                alert('Failed to copy to clipboard. Please try selecting and copying manually.');
+                console.error('Copy error:', error);
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('sourceModal').addEventListener('click', (e) => {
+            if (e.target.id === 'sourceModal') {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
