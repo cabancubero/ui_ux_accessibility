@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hick's Law: Voter Registration Examples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f4e3;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #442f10;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            background: #c2cef2;
+            padding: 20px;
+            border-radius: 8px;
+            color: #442f10;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .example {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .example h2 {
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .bad-example h2 {
+            color: #9f126c;
+        }
+
+        .good-example h2 {
+            color: #29583f;
+        }
+
+        /* BAD EXAMPLE - Overwhelming */
+        .bad-example .content {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .bad-example .section {
+            border: 2px solid #9f126c;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background-color: #f8f4e3;
+        }
+
+        .bad-example h3 {
+            color: #442f10;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .bad-example p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #442f10;
+            font-size: 14px;
+        }
+
+        .bad-example .form-group {
+            margin-bottom: 15px;
+        }
+
+        .bad-example label {
+            display: block;
+            margin-bottom: 5px;
+            color: #442f10;
+            font-weight: 500;
+        }
+
+        .bad-example input[type="text"],
+        .bad-example input[type="email"],
+        .bad-example select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #9f126c;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .bad-example .checkbox-group {
+            margin: 10px 0;
+        }
+
+        .bad-example .checkbox-item {
+            margin-bottom: 8px;
+        }
+
+        .bad-example input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .bad-example button {
+            background-color: #9f126c;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        .bad-example .info-box {
+            background-color: #f2c53d;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        /* GOOD EXAMPLE - Progressive Disclosure */
+        .good-example .step-container {
+            min-height: 400px;
+        }
+
+        .good-example .step {
+            display: none;
+        }
+
+        .good-example .step.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .good-example .step-header {
+            background-color: #d5ede2;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #29583f;
+        }
+
+        .good-example .step-title {
+            color: #29583f;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .good-example .step-description {
+            color: #442f10;
+            font-size: 14px;
+        }
+
+        .good-example .choice-card {
+            background-color: #f8f4e3;
+            border: 2px solid #29583f;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .good-example .choice-card:hover {
+            background-color: #d5ede2;
+            transform: translateX(5px);
+        }
+
+        .good-example .choice-card h4 {
+            color: #29583f;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .good-example .choice-card p {
+            color: #442f10;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .good-example .form-group {
+            margin-bottom: 20px;
+        }
+
+        .good-example label {
+            display: block;
+            margin-bottom: 8px;
+            color: #442f10;
+            font-weight: 500;
+        }
+
+        .good-example input[type="text"],
+        .good-example input[type="email"],
+        .good-example select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #29583f;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .good-example .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .good-example .btn-primary {
+            background-color: #29583f;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .good-example .btn-primary:hover {
+            background-color: #1d448c;
+        }
+
+        .good-example .btn-secondary {
+            background-color: #7f64a9;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .good-example .btn-back {
+            background-color: #f28d35;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .good-example .progress-bar {
+            background-color: #d5ede2;
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .good-example .progress-fill {
+            background-color: #29583f;
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .good-example .success-message {
+            background-color: #d5ede2;
+            border: 2px solid #29583f;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .good-example .success-message h3 {
+            color: #29583f;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .good-example .success-message p {
+            color: #442f10;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hick's Law: Voter Registration Comparison</h1>
+        
+        <div class="description">
+            <strong>Hick's Law:</strong> The time it takes to make a decision increases with the number and complexity of choices. Compare how overwhelming all choices at once (left) feels versus progressive disclosure (right).
+        </div>
+
+        <div class="comparison">
+            <!-- BAD EXAMPLE -->
+            <div class="example bad-example">
+                <h2>❌ Overwhelming (Violates Hick's Law)</h2>
+                <div class="content">
+                    <div class="section">
+                        <h3>Register to Vote</h3>
+                        <p>New to voting? Register here! You'll need proof of citizenship and residency.</p>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter your full legal name">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="text" placeholder="MM/DD/YYYY">
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <select>
+                                <option>Select your state</option>
+                                <option>California</option>
+                                <option>Texas</option>
+                                <option>New York</option>
+                            </select>
+                        </div>
+                        <button>Register Now</button>
+                    </div>
+
+                    <div class="section">
+                        <h3>Update Registration</h3>
+                        <p>Changed your address or name? Update your information here.</p>
+                        <div class="info-box">
+                            Note: You must update within 30 days of moving or changing your name.
+                        </div>
+                        <div class="form-group">
+                            <label>Current Registration Number</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>What changed?</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="addr"> <label for="addr">Address</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="name"> <label for="name">Name</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="party"> <label for="party">Party Affiliation</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button>Update Information</button>
+                    </div>
+
+                    <div class="section">
+                        <h3>Check Voting Rights Eligibility</h3>
+                        <p>Have you been convicted of a felony? Check if your rights have been restored.</p>
+                        <div class="info-box">
+                            Eligibility varies by state. Some states automatically restore rights after sentence completion, others require additional steps.
+                        </div>
+                        <div class="form-group">
+                            <label>State of Conviction</label>
+                            <select>
+                                <option>Select state</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Year of Conviction</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Have you completed your sentence?</label>
+                            <select>
+                                <option>Select</option>
+                                <option>Yes, fully completed</option>
+                                <option>On probation</option>
+                                <option>On parole</option>
+                            </select>
+                        </div>
+                        <button>Check Eligibility</button>
+                    </div>
+
+                    <div class="section">
+                        <h3>Volunteer as Voter Registration Helper</h3>
+                        <p>Help register voters in your community! No voting eligibility required.</p>
+                        <div class="info-box">
+                            Training provided. Flexible hours. You don't need to be registered to vote yourself to help others register!
+                        </div>
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Volunteer Days</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox"> Weekdays
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox"> Weekends
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox"> Evenings
+                                </div>
+                            </div>
+                        </div>
+                        <button>Sign Up to Volunteer</button>
+                    </div>
+
+                    <div class="section">
+                        <h3>Already Registered?</h3>
+                        <p>Verify your registration status and polling location.</p>
+                        <button>Check Status</button>
+                        <button>Find Polling Place</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GOOD EXAMPLE -->
+            <div class="example good-example">
+                <h2>✓ Progressive Disclosure (Follows Hick's Law)</h2>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar" style="width: 33%"></div>
+                </div>
+
+                <div class="step-container">
+                    <!-- Step 1: Initial Choice -->
+                    <div class="step active" id="step1">
+                        <div class="step-header">
+                            <div class="step-title">Welcome! How can we help you today?</div>
+                            <div class="step-description">Choose the option that best describes what you need</div>
+                        </div>
+
+                        <div class="choice-card" onclick="showStep(2, 'register')">
+                            <h4>Register to Vote</h4>
+                            <p>I'm not registered and want to register for the first time</p>
+                        </div>
+
+                        <div class="choice-card" onclick="showStep(2, 'update')">
+                            <h4>Update My Registration</h4>
+                            <p>I'm registered but need to update my information</p>
+                        </div>
+
+                        <div class="choice-card" onclick="showStep(2, 'rights')">
+                            <h4>Check Voting Rights</h4>
+                            <p>I want to see if I'm eligible to vote or restore my rights</p>
+                        </div>
+
+                        <div class="choice-card" onclick="showStep(2, 'volunteer')">
+                            <h4>Help Register Others</h4>
+                            <p>I want to volunteer to help register voters</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Register Form -->
+                    <div class="step" id="step2-register">
+                        <div class="step-header">
+                            <div class="step-title">Register to Vote</div>
+                            <div class="step-description">Let's get you registered! This will only take a minute</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Full Legal Name</label>
+                            <input type="text" placeholder="Enter your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="text" placeholder="MM/DD/YYYY">
+                        </div>
+
+                        <div class="form-group">
+                            <label>State</label>
+                            <select>
+                                <option>Select your state</option>
+                                <option>California</option>
+                                <option>Texas</option>
+                                <option>New York</option>
+                            </select>
+                        </div>
+
+                        <div class="button-group">
+                            <button class="btn-back" onclick="showStep(1)">Back</button>
+                            <button class="btn-primary" onclick="showSuccess()">Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Update Form -->
+                    <div class="step" id="step2-update">
+                        <div class="step-header">
+                            <div class="step-title">Update Registration</div>
+                            <div class="step-description">What information needs to be updated?</div>
+                        </div>
+
+                        <div class="choice-card" onclick="showSuccess()">
+                            <h4>Address Change</h4>
+                            <p>I moved to a new address</p>
+                        </div>
+
+                        <div class="choice-card" onclick="showSuccess()">
+                            <h4>Name Change</h4>
+                            <p>My legal name has changed</p>
+                        </div>
+
+                        <div class="choice-card" onclick="showSuccess()">
+                            <h4>Party Affiliation</h4>
+                            <p>I want to change my party registration</p>
+                        </div>
+
+                        <div class="button-group">
+                            <button class="btn-back" onclick="showStep(1)">Back</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Rights Check -->
+                    <div class="step" id="step2-rights">
+                        <div class="step-header">
+                            <div class="step-title">Check Voting Rights</div>
+                            <div class="step-description">We'll help you determine your eligibility</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Which state do you live in?</label>
+                            <select>
+                                <option>Select your state</option>
+                                <option>California</option>
+                                <option>Texas</option>
+                                <option>New York</option>
+                            </select>
+                        </div>
+
+                        <div class="button-group">
+                            <button class="btn-back" onclick="showStep(1)">Back</button>
+                            <button class="btn-primary" onclick="showSuccess()">Check Eligibility</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Volunteer -->
+                    <div class="step" id="step2-volunteer">
+                        <div class="step-header">
+                            <div class="step-title">Volunteer Registration</div>
+                            <div class="step-description">Thank you for helping! We'll connect you with opportunities</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" placeholder="Full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="your@email.com">
+                        </div>
+
+                        <div class="button-group">
+                            <button class="btn-back" onclick="showStep(1)">Back</button>
+                            <button class="btn-primary" onclick="showSuccess()">Sign Up</button>
+                        </div>
+                    </div>
+
+                    <!-- Success Step -->
+                    <div class="step" id="step-success">
+                        <div class="success-message">
+                            <h3>✓ All Set!</h3>
+                            <p>We've received your information. You'll receive a confirmation email shortly with next steps.</p>
+                            <div class="button-group" style="margin-top: 20px;">
+                                <button class="btn-secondary" onclick="showStep(1)">Start Over</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentChoice = '';
+
+        function showStep(stepNumber, choice = '') {
+            // Hide all steps
+            document.querySelectorAll('.good-example .step').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            // Update progress bar
+            const progress = stepNumber === 1 ? 33 : (stepNumber === 2 ? 66 : 100);
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            if (stepNumber === 1) {
+                document.getElementById('step1').classList.add('active');
+            } else if (stepNumber === 2) {
+                currentChoice = choice;
+                document.getElementById('step2-' + choice).classList.add('active');
+            }
+        }
+
+        function showSuccess() {
+            document.querySelectorAll('.good-example .step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById('progressBar').style.width = '100%';
+            document.getElementById('step-success').classList.add('active');
+        }
+    </script>
+</body>
+</html>
