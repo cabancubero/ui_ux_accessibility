@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Examples for Screen Readers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: #f8f4e3;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        header {
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: #442f10;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            color: #1d448c;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h3 {
+            color: #29583f;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .info-box {
+            background-color: #d5ede2;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .exercise-box {
+            background-color: #f2c53d;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+        
+        .exercise-box p {
+            color: #442f10;
+        }
+        
+        .example-box {
+            background-color: #f8f4e3;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .practice-box {
+            background-color: #c2cef2;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1.5rem;
+        }
+        
+        code {
+            background-color: #e5e7eb;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .code-block {
+            display: block;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            overflow-x: auto;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        
+        button {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            position: relative;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+        }
+        
+        button:focus {
+            outline: 3px solid #1d448c;
+            outline-offset: 2px;
+        }
+        
+        .icon-button {
+            width: 48px;
+            height: 48px;
+            font-size: 1.5rem;
+        }
+        
+        .purple-btn { background-color: #7f64a9; color: white; }
+        .green-btn { background-color: #29583f; color: white; }
+        .magenta-btn { background-color: #9f126c; color: white; }
+        .blue-btn { background-color: #1d448c; color: white; }
+        
+        .notification-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background-color: #f28d35;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            color: #442f10;
+            margin-bottom: 0.5rem;
+        }
+        
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px solid #c2cef2;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #1d448c;
+        }
+        
+        .help-text {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+        
+        .search-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .search-container input {
+            flex: 1;
+        }
+        
+        .search-container button {
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        nav a:hover {
+            opacity: 0.8;
+        }
+        
+        nav a:focus {
+            outline: 3px solid #1d448c;
+            outline-offset: 2px;
+        }
+        
+        .nav-home {
+            background-color: #d5ede2;
+            color: #29583f;
+        }
+        
+        .nav-other {
+            background-color: #c2cef2;
+            color: #1d448c;
+        }
+        
+        .profile-card {
+            border: 2px solid #c2cef2;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .avatar {
+            width: 64px;
+            height: 64px;
+            background-color: #7f64a9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .profile-info h3 {
+            margin: 0;
+            color: #442f10;
+        }
+        
+        .profile-info p {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        .contact-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-actions button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .status-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .status-success {
+            background-color: #d5ede2;
+            color: #29583f;
+        }
+        
+        .status-warning {
+            background-color: #f28d35;
+            color: white;
+        }
+        
+        footer {
+            background-color: #442f10;
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        footer h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        
+        footer h3 {
+            color: #f2c53d;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer h3:first-of-type {
+            margin-top: 0;
+        }
+        
+        footer p, footer ul {
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        footer ul {
+            list-style: none;
+        }
+        
+        footer li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .divider {
+            border-top: 1px solid rgba(255,255,255,0.3);
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+        }
+        
+        ul {
+            margin-left: 1rem;
+        }
+        
+        .text-sm {
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Accessibility Examples for Screen Readers</h1>
+            <p>Examples of properly labeled components for web and mobile apps</p>
+        </header>
+
+        <!-- Section 1: Images with Alt Text -->
+        <section>
+            <h2>Images with Alternative Text (Alt Text)</h2>
+            
+            <div class="info-box">
+                <h3>What is Alt Text?</h3>
+                <p class="text-sm">
+                    Alt text is a written description of an image that screen readers announce to users who cannot see the image. It serves multiple purposes: it helps visually impaired users understand image content, appears when images fail to load, and helps search engines understand your content.
+                </p>
+                <p class="text-sm" style="font-weight: 600; color: #442f10; margin-top: 0.5rem;">
+                    Rule of thumb: If you removed the image, would the alt text convey the same information or function? If yes, it's good alt text.
+                </p>
+            </div>
+            
+            <div style="margin-bottom: 2rem;">
+                <h3>Decorative Image (Empty Alt)</h3>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23f28d35' width='100' height='100'/%3E%3C/svg%3E"
+                     alt=""
+                     style="width: 96px; height: 96px; border-radius: 4px;">
+                <p class="text-sm" style="color: #6b7280; margin-top: 0.5rem;">
+                    Code: <code>alt=""</code>
+                </p>
+                <p class="text-sm" style="margin-top: 0.5rem;">
+                    <strong>When to use:</strong> For purely decorative images that don't convey meaningful information (borders, spacers, design elements). An empty alt attribute tells screen readers to skip the image entirely. Never omit the alt attribute completely - always include it, even if empty.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h3>Informative Image (Descriptive Alt)</h3>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%2329583f' width='100' height='100'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='50'%3E✓%3C/text%3E%3C/svg%3E"
+                     alt="Task completed successfully"
+                     style="width: 96px; height: 96px; border-radius: 4px;">
+                <p class="text-sm" style="color: #6b7280; margin-top: 0.5rem;">
+                    Code: <code>alt="Task completed successfully"</code>
+                </p>
+                <p class="text-sm" style="margin-top: 0.5rem;">
+                    <strong>When to use:</strong> For images that convey information or meaning. Describe what the image shows or what information it communicates, not just "image of..." or "picture of...". Focus on the purpose, not unnecessary details.
+                </p>
+            </div>
+
+            <div class="practice-box">
+                <p class="text-sm" style="font-weight: 600; margin-bottom: 0.5rem;">Alt Text Best Practices:</p>
+                <ul class="text-sm">
+                    <li>Keep it concise (typically under 125 characters)</li>
+                    <li>Don't start with "image of" or "picture of" (screen readers already announce it's an image)</li>
+                    <li>For complex images like charts, provide a brief alt text and a longer description nearby</li>
+                    <li>For images of text, the alt text should include that exact text</li>
+                    <li>Context matters - the same image might need different alt text in different situations</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 2: Buttons with ARIA Labels -->
+        <section>
+            <h2>Icon Buttons with ARIA Labels</h2>
+            
+            <div class="info-box">
+                <h3>What are ARIA Labels?</h3>
+                <p class="text-sm">
+                    ARIA labels provide invisible text descriptions for interactive elements that screen readers announce to users. They're essential when an element's purpose isn't clear from its visible content alone - like icon-only buttons. Think of them as invisible sticky notes that only assistive technology can read.
+                </p>
+                <p class="text-sm" style="font-weight: 600; color: #442f10; margin-top: 0.5rem;">
+                    Key principle: If a button or link has visible text already, you DON'T need an aria-label. Use aria-label when the visual appearance doesn't communicate the function to someone who can't see it.
+                </p>
+            </div>
+            
+            <div class="button-group">
+                <button aria-label="View notifications" class="icon-button purple-btn">
+                    🔔
+                    <span class="notification-badge" aria-label="3 unread notifications">3</span>
+                </button>
+
+                <button aria-label="Shopping cart" title="Shopping cart" class="icon-button green-btn">
+                    🛒
+                </button>
+
+                <button aria-label="Open menu" aria-expanded="false" class="icon-button magenta-btn">
+                    ☰
+                </button>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <div class="example-box">
+                    <p class="text-sm" style="font-weight: 600; margin-bottom: 0.25rem;">Example 1: Notification Button</p>
+                    <code class="code-block">aria-label="View notifications"</code>
+                    <p style="font-size: 0.75rem; margin-top: 0.5rem;">Without this, a screen reader would only say "button" - not helpful! The aria-label tells users what the button does.</p>
+                </div>
+
+                <div class="example-box">
+                    <p class="text-sm" style="font-weight: 600; margin-bottom: 0.25rem;">Example 2: Notification Badge</p>
+                    <code class="code-block">aria-label="3 unread notifications"</code>
+                    <p style="font-size: 0.75rem; margin-top: 0.5rem;">Dynamic aria-labels can provide real-time context. The badge updates to announce "3 unread notifications" when the count changes.</p>
+                </div>
+
+                <div class="example-box">
+                    <p class="text-sm" style="font-weight: 600; margin-bottom: 0.25rem;">Example 3: Toggle Button with State</p>
+                    <code class="code-block">aria-label="Open menu" / "Close menu"</code>
+                    <code class="code-block">aria-expanded="false" / "true"</code>
+                    <p style="font-size: 0.75rem; margin-top: 0.5rem;">For toggle buttons, update the aria-label to match the current state. The aria-expanded attribute tells screen readers whether the controlled content is open or closed.</p>
+                </div>
+            </div>
+
+            <div class="practice-box">
+                <p class="text-sm" style="font-weight: 600; margin-bottom: 0.5rem;">ARIA Label Best Practices:</p>
+                <ul class="text-sm">
+                    <li>Use action verbs that describe what happens when clicked (View, Open, Delete, Add)</li>
+                    <li>Keep labels concise but descriptive enough to be meaningful</li>
+                    <li>Update dynamic labels when the button's function changes</li>
+                    <li>Don't duplicate visible text - if text is already there, aria-label will override it unnecessarily</li>
+                    <li>Combine with title attribute for mouse hover tooltips, but don't rely on title alone</li>
+                    <li>Test with actual screen readers - what sounds good visually might be awkward when spoken</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 3: Form Inputs with Labels -->
+        <section>
+            <h2>Form Inputs with Proper Labels</h2>
+            
+            <div class="info-box">
+                <h3>Why Input Labels Matter</h3>
+                <p class="text-sm">
+                    Proper input labels are critical for accessibility. They create a programmatic association between the label text and the input field, so screen readers announce what each field is for. Labels also improve usability for everyone - clicking the label focuses the input, making it easier to use on mobile devices.
+                </p>
+                <p class="text-sm" style="font-weight: 600; color: #442f10; margin-top: 0.5rem;">
+                    Every input MUST have a label. If you can't show a visible label, use aria-label, but visible labels are always preferred because they help all users, not just screen reader users.
+                </p>
+            </div>
+            
+            <div class="input-group">
+                <div class="example-box" style="margin-bottom: 0.5rem;">
+                    <p class="text-sm" style="font-weight: 600; margin-bottom: 0.25rem;">Method 1: Explicit Association (Recommended)</p>
+                    <code class="code-block">&lt;label for="username"&gt;Username&lt;/label&gt;</code>
+                    <code class="code-block">&lt;input id="username" type="text" /&gt;</code>
+                    <p style="font-size: 0.75rem; margin-top: 0.5rem;">The for attribute on the label matches the id on the input. This creates a programmatic link that screen readers understand. Users can click the label to focus the input.</p>
+                </div>
+                <label for="username">Username</label>
+                <input id="username" type="text" placeholder="Enter your username">
+            </div>
+
+            <div class="input-group">
+                <div class="example-box" style="margin-bottom: 0.5rem;">
+                    <p class="text-sm" style="font-weight: 600; margin-bottom: 0.25rem;">Method 2: Labels with Additional Help Text</p>
+                    <code class="code-block">&lt;label for="email"&gt;Email Address&lt;/label&gt;</code>
+                    <code class="code-block">&lt;input id="email" aria-describedby="email-help" /&gt;</code>
+                    <code class="code-block">&lt;p id="email-help"&gt;Help text here&lt;/p&gt;</code>
+                    <p style="font-size: 0.75rem; margin-top: 0.5rem;">Use aria-describedby to link help text or error messages. Screen readers will announce the label first, then the description. This provides context without cluttering the main label.</p>
+                </div>
+                <label for="email">Email Address</label>
+                <input id="email" type="email" aria-describedby="email-help" placeholder="you@example.com">
+                <p id="email-help" class="help-text">We'll never share your email with anyone else.</p>
+            </div>
+
+            <div class="input-group">
+                <div class="example-box" style="margin-bottom: 0.5rem;">
+                    <p class="text-sm" style="font-weight: 600; margin-bottom: 0.25rem;">Method 3: aria-label (When No Visible Label)</p>
+                    <code class="code-block">&lt;input type="search" aria-label="Search products" /&gt;</code>
+                    <p style="font-size: 0.75rem; margin-top: 0.5rem;">Use aria-label only when design constraints prevent a visible label. Common cases: search boxes where the button provides context, or filters in a data table where column headers serve as labels. Visible labels are always better when possible.</p>
+                </div>
+                <div class="search-container">
+                    <input type="search" aria-label="Search products" placeholder="Search...">
+                    <button class="blue-btn">Search</button>
+                </div>
+            </div>
+
+            <div class="practice-box">
+                <p class="text-sm" style="font-weight: 600; margin-bottom: 0.5rem;">Input Label Best Practices:</p>
+                <ul class="text-sm">
+                    <li>Always use visible labels when possible - they help everyone, not just screen reader users</li>
+                    <li>Place labels above or to the left of inputs for better readability</li>
+                    <li>Make labels descriptive - "Email" is better than "Enter your email address here"</li>
+                    <li>Use aria-describedby for help text, error messages, or format requirements</li>
+                    <li>Don't use placeholder text as the only label - it disappears when typing and has low contrast</li>
+                    <li>For required fields, add "required" to the label or use aria-required="true"</li>
+                    <li>Group related inputs (like address fields) with fieldset and legend elements</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 4: Navigation -->
+        <section>
+            <h2>Semantic Navigation</h2>
+            
+            <nav aria-label="Main navigation">
+                <ul>
+                    <li><a href="#home" class="nav-home" aria-current="page">Home</a></li>
+                    <li><a href="#products" class="nav-other">Products</a></li>
+                    <li><a href="#about" class="nav-other">About</a></li>
+                </ul>
+            </nav>
+
+            <p class="text-sm" style="color: #6b7280; margin-top: 1rem;">
+                Uses <code>aria-label="Main navigation"</code> and <code>aria-current="page"</code>
+            </p>
+        </section>
+
+        <!-- Section 5: Complex Components -->
+        <section>
+            <h2>Complex Interactive Components</h2>
+            
+            <div class="info-box">
+                <h3>Understanding Complex Components</h3>
+                <p class="text-sm">
+                    Complex components have multiple interactive elements working together. They need extra ARIA attributes to create programmatic relationships that screen readers can understand. The card below demonstrates how to label grouped actions, provide context, and make multi-part interfaces accessible.
+                </p>
+                <div class="exercise-box">
+                    <p class="text-sm" style="font-weight: 600; margin-bottom: 0.25rem;">🔍 Try This Exercise:</p>
+                    <p class="text-sm">
+                        Right-click on any element in the card below and select "Inspect" (or "Inspect Element"). Look at the HTML code to see the aria-label, aria-labelledby, and role attributes. Notice how invisible accessibility information is embedded throughout the component. Try inspecting the avatar, the button group, and individual buttons to see different ARIA patterns in action.
+                    </p>
+                </div>
+            </div>
+            
+            <article class="profile-card" aria-labelledby="card-title">
+                <h3 id="card-title">User Profile Card</h3>
+                <div class="profile-header">
+                    <div class="avatar" role="img" aria-label="User avatar">👤</div>
+                    <div class="profile-info">
+                        <h3 style="font-size: 1rem;">Jane Doe</h3>
+                        <p>Product Designer</p>
+                    </div>
+                </div>
+                
+                <div class="contact-actions" role="group" aria-label="Contact actions">
+                    <button class="green-btn" aria-label="Send email to Jane Doe">
+                        ✉️ Email
+                    </button>
+                    <button class="blue-btn" aria-label="Call Jane Doe">
+                        📞 Call
+                    </button>
+                    <button class="magenta-btn" aria-label="Schedule meeting with Jane Doe">
+                        📅 Schedule
+                    </button>
+                </div>
+            </article>
+        </section>
+
+        <!-- Section 6: Live Regions -->
+        <section>
+            <h2>Live Regions and Status Messages</h2>
+            
+            <div class="info-box">
+                <h3>What are Live Regions?</h3>
+                <p class="text-sm">
+                    Live regions tell screen readers to announce content changes automatically, even when users aren't focused on that part of the page. This is critical for dynamic updates like notifications, form validation errors, loading states, or success messages. Without live regions, screen reader users would never know these updates happened.
+                </p>
+                <p class="text-sm" style="font-weight: 600; color: #442f10; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                    Two politeness levels:
+                </p>
+                <ul class="text-sm">
+                    <li><strong>aria-live="polite"</strong> - Waits for a pause in speech before announcing. Use for non-urgent updates like "Item added to cart" or "Changes saved"</li>
+                    <li><strong>aria-live="assertive"</strong> - Interrupts immediately. Use only for urgent alerts like "Error: Payment failed" or "Warning: Session expiring"</li>
+                </ul>
+                <div class="exercise-box">
+                    <p class="text-sm" style="font-weight: 600; margin-bottom: 0.25rem;">🔍 Try This Exercise:</p>
+                    <p class="text-sm">
+                        Right-click on the success and warning messages below and inspect them. Notice the combination of role="status" or role="alert" with aria-live attributes. The role provides semantic meaning (what kind of message), while aria-live controls announcement timing. Try changing these messages dynamically in your own code to see how screen readers announce updates.
+                    </p>
+                </div>
+            </div>
+            
+            <div role="status" aria-live="polite" class="status-message status-success">
+                <strong>Success!</strong> Your changes have been saved.
+            </div>
+
+            <div role="alert" aria-live="assertive" class="status-message status-warning">
+                <strong>Warning:</strong> Please review the form for errors.
+            </div>
+
+            <div class="practice-box">
+                <p class="text-sm" style="font-weight: 600; margin-bottom: 0.5rem;">Live Region Best Practices:</p>
+                <ul class="text-sm">
+                    <li>Keep messages concise - screen readers will read the entire content</li>
+                    <li>Don't overuse assertive - too many interruptions frustrate users</li>
+                    <li>Place live regions in your HTML on page load (even if empty initially) so browsers register them</li>
+                    <li>Use role="status" for informational updates, role="alert" for warnings/errors</li>
+                    <li>Test by turning on a screen reader and triggering the update - does it announce clearly?</li>
+                    <li>Consider adding aria-atomic="true" if you want the entire region re-announced on updates</li>
+                    <li>Loading spinners should use aria-live="polite" with text like "Loading content"</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <h2>Comprehensive Best Practices Guide</h2>
+            
+            <h3>1. Use Semantic HTML First</h3>
+            <p>
+                Before reaching for ARIA, use the right HTML element. A button element is better than a div with an onclick handler because browsers and assistive technology already know how to handle it. Use nav for navigation, main for primary content, article for self-contained content, and header/footer appropriately.
+            </p>
+            <p style="font-style: italic;">
+                Remember: "No ARIA is better than bad ARIA." Only add ARIA when semantic HTML isn't enough.
+            </p>
+
+            <h3>2. Images and Alt Text</h3>
+            <p>
+                Every image must have an alt attribute, even if it's empty. Decorative images get empty alt (alt=""). Informative images need descriptive text that conveys the same information as the image. For complex images like charts or infographics, provide both brief alt text and a longer description elsewhere on the page.
+            </p>
+            <p>
+                Test: Cover the image and read only the alt text. Does it convey everything important? If yes, it's good.
+            </p>
+
+            <h3>3. Label Every Interactive Element</h3>
+            <p>
+                Buttons, links, and form inputs must have accessible names. For buttons with text, you're done. For icon buttons, add aria-label. For form inputs, use label elements with for/id associations. If you absolutely can't show a visible label, use aria-label, but visible labels are always preferred.
+            </p>
+            <p>
+                Test: Tab through your interface with a screen reader. Can you tell what each element does without seeing it?
+            </p>
+
+            <h3>4. Manage Focus and Keyboard Navigation</h3>
+            <p>
+                All interactive elements must be keyboard accessible. Users should be able to tab through your interface in a logical order. Never use tabindex values greater than 0 (it breaks natural tab order). When content updates dynamically, manage focus appropriately - if a modal opens, move focus into it; when it closes, return focus to the trigger.
+            </p>
+            <p>
+                Test: Unplug your mouse and navigate your entire application with just the keyboard. Can you reach everything?
+            </p>
+
+            <h3>5. Announce Dynamic Content Changes</h3>
+            <p>
+                When content updates without a page reload (like notifications, errors, or loading states), screen readers won't automatically announce it. Use aria-live regions to notify users: aria-live="polite" for non-urgent updates, aria-live="assertive" for critical alerts. Combine with role="status" or role="alert" for better semantics.
+            </p>
+            <p>
+                Test: Submit a form with errors while using a screen reader. Are you notified about the errors?
+            </p>
+
+            <h3>6. Provide Context for Interactive Widgets</h3>
+            <p>
+                Complex components like tabs, accordions, or custom dropdowns need additional ARIA to work with assistive technology. Use aria-expanded for toggleable content, aria-controls to link controls with their content, aria-selected for tabs, and aria-describedby to provide additional context or instructions.
+            </p>
+            <p>
+                Test: Can a screen reader user understand the state and relationships between elements?
+            </p>
+
+            <h3>7. Color and Contrast</h3>
+            <p>
+                Don't rely on color alone to convey information. Add icons, text labels, or patterns. Ensure text has sufficient contrast against backgrounds (4.5:1 for normal text, 3:1 for large text). This helps users with low vision, color blindness, and those using devices in bright sunlight.
+            </p>
+
+            <h3>8. Test with Real Users and Real Tools</h3>
+            <p>
+                Automated testing catches only about 30% of accessibility issues. Test with actual screen readers like NVDA (Windows, free), JAWS (Windows), VoiceOver (Mac/iOS), or TalkBack (Android). Even better, involve users with disabilities in your testing process.
+            </p>
+            <p>
+                Quick test: Turn on VoiceOver (Cmd+F5 on Mac) or NVDA and try to complete a key task on your site without looking at the screen.
+            </p>
+
+            <div class="divider">
+                <p style="font-style: italic;">
+                    Remember: Accessibility is not a checklist to complete once. It's an ongoing commitment to making your application usable by everyone, regardless of how they interact with technology.
+                </p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
