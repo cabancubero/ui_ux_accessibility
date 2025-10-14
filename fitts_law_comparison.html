@@ -12,53 +12,79 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f4e3;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #EBE5D6 0%, #d8d0bd 100%);
+            padding: 2rem;
+            line-height: 1.7;
+            color: #363D4A;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 3rem;
         }
 
         .form-section {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.06);
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+        }
+
+        .form-section:hover {
+            border-color: #B53D1A;
+            box-shadow: 0 4px 8px rgba(181, 61, 26, 0.15), 0 1px 3px rgba(0,0,0,0.06);
         }
 
         h1 {
             text-align: center;
-            color: #442f10;
-            margin-bottom: 30px;
+            color: #363D4A;
+            margin-bottom: 2rem;
             grid-column: 1 / -1;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         h2 {
-            color: #442f10;
-            margin-bottom: 20px;
-            font-size: 1.3em;
+            background: linear-gradient(135deg, #B53D1A 0%, #9a3416 100%);
+            color: #FFFFFF;
+            padding: 1.5rem;
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            text-align: center;
         }
 
-        .bad-form h2 {
-            color: #9f126c;
+        .form-content {
+            padding: 3rem;
         }
 
-        .good-form h2 {
-            color: #29583f;
+        .bad-form {
+            border: 2px solid #B53D1A;
         }
 
-        /* BAD FORM - Violates Fitt's Law */
+        .good-form {
+            border: 3px solid #B53D1A;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .good-form:hover {
+            box-shadow: 0 12px 30px rgba(181, 61, 26, 0.2), 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        /* BAD FORM - Violates Fitt's Law (keeps tiny sizes) */
         .bad-form label {
             display: block;
             font-size: 9px;
             margin-bottom: 2px;
-            color: #442f10;
+            color: #363D4A;
         }
 
         .bad-form input[type="text"],
@@ -67,9 +93,21 @@
             height: 16px;
             padding: 2px 4px;
             font-size: 8px;
-            border: 1px solid #9f126c;
+            border: 1px solid rgba(54, 61, 74, 0.3);
             border-radius: 2px;
             margin-bottom: 8px;
+            transition: border-color 0.2s ease;
+        }
+
+        .bad-form input[type="text"]:hover,
+        .bad-form textarea:hover {
+            border-color: #B53D1A;
+        }
+
+        .bad-form input[type="text"]:focus,
+        .bad-form textarea:focus {
+            outline: none;
+            border-color: #363D4A;
         }
 
         .bad-form textarea {
@@ -85,6 +123,7 @@
             display: block;
             margin-bottom: 3px;
             font-size: 8px;
+            color: #363D4A;
         }
 
         .bad-form input[type="checkbox"] {
@@ -97,39 +136,52 @@
         .bad-form button {
             padding: 3px 8px;
             font-size: 8px;
-            background-color: #9f126c;
-            color: white;
+            background: linear-gradient(135deg, #B53D1A 0%, #9a3416 100%);
+            color: #FFFFFF;
             border: none;
             border-radius: 2px;
             cursor: pointer;
             margin-top: 8px;
+            transition: opacity 0.2s ease;
+        }
+
+        .bad-form button:hover {
+            opacity: 0.9;
         }
 
         /* GOOD FORM - Follows Fitt's Law */
         .good-form label {
             display: block;
-            font-size: 16px;
-            margin-bottom: 8px;
-            color: #442f10;
-            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #000000;
+            font-weight: 600;
         }
 
         .good-form input[type="text"],
         .good-form textarea {
             width: 100%;
-            padding: 16px;
-            font-size: 16px;
-            border: 2px solid #29583f;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            transition: border-color 0.3s;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 2px solid rgba(54, 61, 74, 0.2);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            background-color: #f8f6f0;
+            color: #363D4A;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .good-form input[type="text"]:hover,
+        .good-form textarea:hover {
+            border-color: #B53D1A;
         }
 
         .good-form input[type="text"]:focus,
         .good-form textarea:focus {
             outline: none;
-            border-color: #1d448c;
-            box-shadow: 0 0 0 3px rgba(29, 68, 140, 0.1);
+            border-color: #363D4A;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(54, 61, 74, 0.15);
         }
 
         .good-form textarea {
@@ -138,28 +190,30 @@
         }
 
         .good-form .checkbox-group {
-            margin: 20px 0;
+            margin: 1.5rem 0;
         }
 
         .good-form .checkbox-item {
             display: flex;
             align-items: center;
-            padding: 16px;
-            margin-bottom: 12px;
-            background-color: #d5ede2;
-            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #EBE5D6 0%, #d8d0bd 100%);
+            border-radius: 10px;
+            border: 2px solid transparent;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .good-form .checkbox-item:hover {
-            background-color: #c2cef2;
+            border-color: #B53D1A;
+            box-shadow: 0 2px 4px rgba(181, 61, 26, 0.15);
         }
 
         .good-form input[type="checkbox"] {
             width: 24px;
             height: 24px;
-            margin-right: 12px;
+            margin-right: 0.75rem;
             cursor: pointer;
             flex-shrink: 0;
         }
@@ -168,42 +222,81 @@
             margin: 0;
             cursor: pointer;
             flex-grow: 1;
+            font-weight: 600;
         }
 
         .good-form button {
             width: 100%;
-            padding: 18px;
-            font-size: 18px;
-            font-weight: bold;
-            background-color: #29583f;
-            color: white;
-            border: none;
-            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #363D4A 0%, #2a3240 100%);
+            color: #FFFFFF;
+            border: 2px solid transparent;
+            border-radius: 10px;
             cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s;
+            margin-top: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .good-form button:hover {
-            background-color: #1d448c;
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
 
-        .good-form button:active {
-            transform: scale(0.98);
+        .good-form button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(54, 61, 74, 0.3);
         }
 
         .description {
             grid-column: 1 / -1;
-            background: #c2cef2;
-            padding: 20px;
-            border-radius: 8px;
-            color: #442f10;
+            background: #FFFFFF;
+            padding: 2rem;
+            border-radius: 16px;
+            color: #363D4A;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.06);
+            border: 2px solid transparent;
         }
 
-        @media (max-width: 768px) {
+        .description strong {
+            color: #B53D1A;
+            font-weight: 700;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
             .container {
                 grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-content {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            body {
+                padding: 1.5rem;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .form-content {
+                padding: 2rem;
             }
         }
     </style>
@@ -219,75 +312,79 @@
         <!-- BAD FORM -->
         <div class="form-section bad-form">
             <h2>❌ Poor Design (Violates Fitt's Law)</h2>
-            <form>
-                <label for="bad-fname">First Name</label>
-                <input type="text" id="bad-fname" name="fname">
+            <div class="form-content">
+                <form>
+                    <label for="bad-fname">First Name</label>
+                    <input type="text" id="bad-fname" name="fname">
 
-                <label for="bad-lname">Last Name</label>
-                <input type="text" id="bad-lname" name="lname">
+                    <label for="bad-lname">Last Name</label>
+                    <input type="text" id="bad-lname" name="lname">
 
-                <label for="bad-address">Address</label>
-                <textarea id="bad-address" name="address"></textarea>
+                    <label for="bad-address">Address</label>
+                    <textarea id="bad-address" name="address"></textarea>
 
-                <label>What issues do you care about?</label>
-                <div class="checkbox-group">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="bad-env" name="issues" value="environment">
-                        <label for="bad-env">Environment</label>
+                    <label>What issues do you care about?</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="bad-env" name="issues" value="environment">
+                            <label for="bad-env">Environment</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="bad-health" name="issues" value="healthcare">
+                            <label for="bad-health">Healthcare</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="bad-edu" name="issues" value="education">
+                            <label for="bad-edu">Education</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="bad-econ" name="issues" value="economy">
+                            <label for="bad-econ">Economy</label>
+                        </div>
                     </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="bad-health" name="issues" value="healthcare">
-                        <label for="bad-health">Healthcare</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="bad-edu" name="issues" value="education">
-                        <label for="bad-edu">Education</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="bad-econ" name="issues" value="economy">
-                        <label for="bad-econ">Economy</label>
-                    </div>
-                </div>
 
-                <button type="submit">Submit</button>
-            </form>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
 
         <!-- GOOD FORM -->
         <div class="form-section good-form">
             <h2>✓ Good Design (Follows Fitt's Law)</h2>
-            <form>
-                <label for="good-fname">First Name</label>
-                <input type="text" id="good-fname" name="fname">
+            <div class="form-content">
+                <form>
+                    <label for="good-fname">First Name</label>
+                    <input type="text" id="good-fname" name="fname">
 
-                <label for="good-lname">Last Name</label>
-                <input type="text" id="good-lname" name="lname">
+                    <label for="good-lname">Last Name</label>
+                    <input type="text" id="good-lname" name="lname">
 
-                <label for="good-address">Address</label>
-                <textarea id="good-address" name="address"></textarea>
+                    <label for="good-address">Address</label>
+                    <textarea id="good-address" name="address"></textarea>
 
-                <label>What issues do you care about?</label>
-                <div class="checkbox-group">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="good-env" name="issues" value="environment">
-                        <label for="good-env">Environment</label>
+                    <label>What issues do you care about?</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="good-env" name="issues" value="environment">
+                            <label for="good-env">Environment</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="good-health" name="issues" value="healthcare">
+                            <label for="good-health">Healthcare</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="good-edu" name="issues" value="education">
+                            <label for="good-edu">Education</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="good-econ" name="issues" value="economy">
+                            <label for="good-econ">Economy</label>
+                        </div>
                     </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="good-health" name="issues" value="healthcare">
-                        <label for="good-health">Healthcare</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="good-edu" name="issues" value="education">
-                        <label for="good-edu">Education</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="good-econ" name="issues" value="economy">
-                        <label for="good-econ">Economy</label>
-                    </div>
-                </div>
 
-                <button type="submit">Submit</button>
-            </form>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
