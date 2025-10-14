@@ -6,54 +6,172 @@
     <title>Lazy Loading Example</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #EBE5D6 0%, #d8d0bd 100%);
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 2rem;
+            line-height: 1.7;
+            color: #363D4A;
         }
-        
+
+        .page-header {
+            background: #FFFFFF;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.06);
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            color: #363D4A;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .page-header .intro {
+            color: #363D4A;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header .note {
+            background: linear-gradient(135deg, #EBE5D6 0%, #d8d0bd 100%);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #B53D1A;
+            margin-top: 1rem;
+        }
+
+        .page-header .note strong {
+            color: #B53D1A;
+            font-weight: 700;
+        }
+
         .article {
-            margin-bottom: 40px;
+            background: #FFFFFF;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.06);
+            border: 2px solid rgba(54, 61, 74, 0.1);
         }
-        
+
         .decorative-image {
             width: 100%;
             height: 300px;
-            background-color: #f0f0f0;
-            margin: 20px 0;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #EBE5D6 0%, #d8d0bd 100%);
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(54, 61, 74, 0.15);
         }
-        
+
+        .decorative-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            margin: -25px 0 0 -25px;
+            border: 4px solid rgba(181, 61, 26, 0.2);
+            border-top-color: #B53D1A;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .decorative-image::after {
+            content: 'Loading image...';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, calc(-50% + 40px));
+            color: #363D4A;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         .decorative-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
-        
-        h1 {
-            color: #333;
+
+        .decorative-image.loaded::before,
+        .decorative-image.loaded::after {
+            display: none;
         }
-        
+
+        .decorative-image.loaded img {
+            opacity: 1;
+        }
+
         h2 {
-            color: #555;
-            margin-top: 30px;
+            color: #363D4A;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
-        
+
         p {
-            color: #666;
-            margin-bottom: 15px;
+            color: #363D4A;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            background: linear-gradient(135deg, #B53D1A 0%, #9a3416 100%);
+            color: #FFFFFF;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to Our Blog</h1>
-    <p>This content loads immediately, ensuring users can start reading right away.</p>
+    <div class="page-header">
+        <h1>Lazy Loading Demonstration</h1>
+        <p class="intro">Notice how text content loads immediately while images load progressively as you scroll.</p>
+
+        <div class="note">
+            <strong>Key Point:</strong> Content is always accessible immediately. Images load with a simulated delay to demonstrate lazy loading in action - you can start reading without waiting!
+        </div>
+
+        <div class="note">
+            <strong style="text-align: left;">What to observe:</strong>
+            <ul style="text-align: left; margin-top: 0.5rem; padding-left: 1.5rem;">
+                <li>All text content appears instantly and is readable right away</li>
+                <li>As you scroll, images show a loading spinner before appearing</li>
+                <li>Each image has a 1.5 second delay to make the loading behavior visible</li>
+                <li>Images only start loading when they're about to enter your viewport</li>
+                <li>The lazy loading attribute ensures images load only when needed, improving performance without blocking content consumption</li>
+            </ul>
+        </div>
+    </div>
 
     <div class="article">
-        <h2>Article 1: The Beauty of Nature</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. The text content is available instantly, allowing users to begin reading without waiting for images.</p>
+        <h2>Article 1: The Beauty of Nature<span class="status-indicator">✓ Content Ready</span></h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         
         <!-- Decorative image with lazy loading -->
         <div class="decorative-image">
@@ -64,12 +182,12 @@
             >
         </div>
         
-        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Notice how the text loads immediately while images load as you scroll down the page.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
     </div>
 
     <div class="article">
-        <h2>Article 2: Mountain Adventures</h2>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. All written content is prioritized for immediate display.</p>
+        <h2>Article 2: Mountain Adventures<span class="status-indicator">✓ Content Ready</span></h2>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         
         <!-- Another lazy-loaded decorative image -->
         <div class="decorative-image">
@@ -80,12 +198,12 @@
             >
         </div>
         
-        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
     </div>
 
     <div class="article">
-        <h2>Article 3: Ocean Explorations</h2>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. The lazy loading attribute ensures images only load when needed.</p>
+        <h2>Article 3: Ocean Explorations<span class="status-indicator">✓ Content Ready</span></h2>
+        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
         
         <!-- Third lazy-loaded decorative image -->
         <div class="decorative-image">
@@ -96,12 +214,12 @@
             >
         </div>
         
-        <p>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        <p>Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio nam libero tempore.</p>
     </div>
 
     <div class="article">
-        <h2>Article 4: Forest Wonders</h2>
-        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. Keep scrolling to see lazy loading in action!</p>
+        <h2>Article 4: Forest Wonders<span class="status-indicator">✓ Content Ready</span></h2>
+        <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae itaque earum rerum hic tenetur.</p>
         
         <!-- Fourth lazy-loaded decorative image -->
         <div class="decorative-image">
@@ -112,15 +230,45 @@
             >
         </div>
         
-        <p>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Images further down the page won't load until you scroll near them.</p>
+        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
     </div>
 
     <script>
-        // Optional: Log when images start loading (for demonstration)
+        // Simulate loading delay to demonstrate lazy loading behavior
         document.querySelectorAll('img[loading="lazy"]').forEach((img, index) => {
-            img.addEventListener('load', () => {
-                console.log(`Image ${index + 1} has loaded!`);
+            const container = img.parentElement;
+
+            // Store the original src
+            const originalSrc = img.getAttribute('src');
+
+            // Remove src initially to prevent immediate loading
+            img.removeAttribute('src');
+
+            // Use Intersection Observer to detect when image enters viewport
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add simulated delay (1.5 seconds) to make loading visible
+                        setTimeout(() => {
+                            // Set the src to start loading
+                            img.setAttribute('src', originalSrc);
+
+                            // When image loads, add loaded class to hide spinner
+                            img.addEventListener('load', () => {
+                                container.classList.add('loaded');
+                                console.log(`Image ${index + 1} loaded!`);
+                            });
+                        }, 1500);
+
+                        // Stop observing once we've triggered the load
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '50px' // Start loading slightly before image enters viewport
             });
+
+            observer.observe(container);
         });
     </script>
 </body>
