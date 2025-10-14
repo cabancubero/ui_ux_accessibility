@@ -14,17 +14,21 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #EBE5D6 0%, #d8d0bd 100%);
-            padding: 2rem;
-            line-height: 1.7;
+            padding: 1.5rem 3rem;
+            line-height: 1.5;
             color: #363D4A;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 1.5rem;
+            width: 100%;
         }
 
         .form-section {
@@ -44,9 +48,9 @@
         h1 {
             text-align: center;
             color: #363D4A;
-            margin-bottom: 2rem;
+            margin-bottom: 0.5rem;
             grid-column: 1 / -1;
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: 800;
             letter-spacing: -0.02em;
         }
@@ -54,16 +58,16 @@
         h2 {
             background: linear-gradient(135deg, #B53D1A 0%, #9a3416 100%);
             color: #FFFFFF;
-            padding: 1.5rem;
+            padding: 1rem;
             margin: 0;
-            font-size: 1.75rem;
+            font-size: 1.25rem;
             font-weight: 700;
             letter-spacing: -0.01em;
             text-align: center;
         }
 
         .form-content {
-            padding: 3rem;
+            padding: 1.5rem;
         }
 
         .bad-form {
@@ -152,8 +156,8 @@
         /* GOOD FORM - Follows Fitt's Law */
         .good-form label {
             display: block;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
             color: #000000;
             font-weight: 600;
         }
@@ -161,11 +165,11 @@
         .good-form input[type="text"],
         .good-form textarea {
             width: 100%;
-            padding: 0.75rem 1rem;
-            font-size: 1rem;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.95rem;
             border: 2px solid rgba(54, 61, 74, 0.2);
             border-radius: 10px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             background-color: #f8f6f0;
             color: #363D4A;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -185,19 +189,19 @@
         }
 
         .good-form textarea {
-            min-height: 120px;
+            min-height: 80px;
             resize: vertical;
         }
 
         .good-form .checkbox-group {
-            margin: 1.5rem 0;
+            margin: 0.75rem 0;
         }
 
         .good-form .checkbox-item {
             display: flex;
             align-items: center;
-            padding: 1rem;
-            margin-bottom: 0.75rem;
+            padding: 0.7rem;
+            margin-bottom: 0.5rem;
             background: linear-gradient(135deg, #EBE5D6 0%, #d8d0bd 100%);
             border-radius: 10px;
             border: 2px solid transparent;
@@ -211,9 +215,9 @@
         }
 
         .good-form input[type="checkbox"] {
-            width: 24px;
-            height: 24px;
-            margin-right: 0.75rem;
+            width: 20px;
+            height: 20px;
+            margin-right: 0.6rem;
             cursor: pointer;
             flex-shrink: 0;
         }
@@ -223,19 +227,20 @@
             cursor: pointer;
             flex-grow: 1;
             font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .good-form button {
             width: 100%;
-            padding: 0.75rem 1.5rem;
-            font-size: 1.1rem;
+            padding: 0.7rem 1.2rem;
+            font-size: 1rem;
             font-weight: 600;
             background: linear-gradient(135deg, #363D4A 0%, #2a3240 100%);
             color: #FFFFFF;
             border: 2px solid transparent;
             border-radius: 10px;
             cursor: pointer;
-            margin-top: 1.5rem;
+            margin-top: 0.75rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
@@ -253,12 +258,13 @@
         .description {
             grid-column: 1 / -1;
             background: #FFFFFF;
-            padding: 2rem;
-            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
             color: #363D4A;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.06);
             border: 2px solid transparent;
+            font-size: 0.95rem;
         }
 
         .description strong {
