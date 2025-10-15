@@ -128,6 +128,21 @@
             box-shadow: 0 0 0 3px rgba(235, 229, 214, 0.2);
         }
 
+        /* Clear button - destructive action */
+        .btn-clear {
+            background: #EBE5D6; /* Light beige */
+            color: #363D4A;
+            border-color: #EBE5D6;
+        }
+
+        .btn-clear:hover,
+        .btn-clear:focus {
+            background: #000000; /* Black on hover */
+            color: #FFFFFF;
+            border-color: #000000;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+        }
+
         /* Back button - navigation */
         .btn-back {
             background: #FFFFFF; /* White */
@@ -267,6 +282,7 @@
         <div class="toolbar-right">
             <button class="btn btn-run" id="run-btn">Run Code</button>
             <button class="btn btn-reset" id="reset-btn">Reset</button>
+            <button class="btn btn-clear" id="clear-btn">Clear</button>
             <button class="btn btn-back" id="back-btn">Back to Home</button>
         </div>
     </div>
@@ -405,9 +421,19 @@
             }
         }
 
+        // Clear all code
+        function clearCode() {
+            if (confirm('Clear all code? This will remove everything from both editors.')) {
+                document.getElementById('html-editor').value = '';
+                document.getElementById('css-editor').value = '';
+                runCode();
+            }
+        }
+
         // Event listeners
         document.getElementById('run-btn').addEventListener('click', runCode);
         document.getElementById('reset-btn').addEventListener('click', resetCode);
+        document.getElementById('clear-btn').addEventListener('click', clearCode);
         document.getElementById('back-btn').addEventListener('click', () => {
             window.location.href = 'index.html';
         });
