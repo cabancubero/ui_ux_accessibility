@@ -317,7 +317,16 @@
         // Load example file
         async function loadExample() {
             if (!exampleName) {
-                document.getElementById('html-editor').value = '<!-- No example specified -->';
+                // No example specified - start with a blank canvas
+                originalHTML = '<h1>Welcome to the Playground!</h1>\n<p>Start coding here...</p>';
+                originalCSS = 'body {\n    font-family: sans-serif;\n    padding: 20px;\n}\n\nh1 {\n    color: #363D4A;\n}';
+
+                document.getElementById('html-editor').value = originalHTML;
+                document.getElementById('css-editor').value = originalCSS;
+                document.getElementById('page-title').textContent = 'Interactive Playground';
+
+                // Initial render
+                runCode();
                 return;
             }
 
