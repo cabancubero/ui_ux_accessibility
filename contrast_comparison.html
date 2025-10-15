@@ -49,6 +49,36 @@
             font-weight: 700;
         }
 
+        .back-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #363D4A;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            border: 2px solid #363D4A;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: #B53D1A;
+            border-color: #B53D1A;
+            box-shadow: 0 4px 8px rgba(181, 61, 26, 0.2);
+        }
+
+        .back-button:focus-visible {
+            outline: 3px solid #B53D1A;
+            outline-offset: 2px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
         .comparison {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -659,10 +689,14 @@
 </head>
 <body>
     <div class="container">
-        <h1>Color Contrast Accessibility</h1>
-        
-        <div class="description">
-            <strong>WCAG Contrast Requirements:</strong> Text must have sufficient contrast with its background. Accessible design doesn't mean ugly - it means thoughtful color choices that work for everyone, including users with low vision or color blindness.
+        <a href="index.html" class="back-button">← Back to Home</a>
+
+        <div class="header-section">
+            <h1>Color Contrast Accessibility</h1>
+
+            <div class="description">
+                <strong>WCAG Contrast Requirements:</strong> Text must have sufficient contrast with its background. Accessible design doesn't mean ugly - it means thoughtful color choices that work for everyone, including users with low vision or color blindness.
+            </div>
         </div>
 
         <div class="comparison">

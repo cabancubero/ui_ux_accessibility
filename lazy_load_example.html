@@ -146,9 +146,36 @@
             font-weight: 600;
             white-space: nowrap;
         }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #363D4A;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            border: 2px solid #363D4A;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: #B53D1A;
+            border-color: #B53D1A;
+            box-shadow: 0 4px 8px rgba(181, 61, 26, 0.2);
+        }
+
+        .back-button:focus-visible {
+            outline: 3px solid #B53D1A;
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
+    <a href="index.html" class="back-button">← Back to Home</a>
+
     <div class="page-header">
         <h1>Lazy Loading Demonstration</h1>
         <p class="intro">Notice how text content loads immediately while images load progressively as you scroll.</p>

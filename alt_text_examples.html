@@ -457,6 +457,31 @@
             font-size: 0.875rem;
         }
 
+        .back-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #363D4A;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            border: 2px solid #363D4A;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: #B53D1A;
+            border-color: #B53D1A;
+            box-shadow: 0 4px 8px rgba(181, 61, 26, 0.2);
+        }
+
+        .back-button:focus-visible {
+            outline: 3px solid #B53D1A;
+            outline-offset: 2px;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 1.5rem 1rem;
@@ -478,6 +503,8 @@
 </head>
 <body>
     <div class="container">
+        <a href="index.html" class="back-button">← Back to Home</a>
+
         <header>
             <h1>Accessibility Examples for Screen Readers</h1>
             <p>Examples of properly labeled components for web and mobile apps</p>
