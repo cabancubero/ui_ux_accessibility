@@ -60,7 +60,6 @@
             font-size: 1rem;
             transition: all 0.25s ease;
             border: 2px solid #363D4A;
-            margin-bottom: 2rem;
         }
 
         .back-button:hover {
@@ -72,6 +71,37 @@
         .back-button:focus-visible {
             outline: 3px solid #B53D1A;
             outline-offset: 2px;
+        }
+
+        .playground-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #B53D1A;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            border: 2px solid #B53D1A;
+        }
+
+        .playground-button:hover {
+            background: #8B2E14;
+            border-color: #8B2E14;
+            box-shadow: 0 4px 8px rgba(181, 61, 26, 0.3);
+        }
+
+        .playground-button:focus-visible {
+            outline: 3px solid #B53D1A;
+            outline-offset: 2px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
         }
 
         .header-section {
@@ -533,7 +563,10 @@
 </head>
 <body>
     <div class="container">
-        <a href="index.html" class="back-button">← Back to Home</a>
+        <div class="nav-buttons">
+            <a href="index.html" class="back-button">← Back to Home</a>
+            <a href="playground.html?example=jakobs_law_comparison" class="playground-button">Try in Playground →</a>
+        </div>
 
         <div class="header-section">
             <h1>Jakob's Law: Campaign Management Tool</h1>
